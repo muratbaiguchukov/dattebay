@@ -109,6 +109,12 @@ public class UserServiceImpl implements UserService {
         return userModel;
     }
 
+    @Override
+    public UserModel getUserByLogin ( String login )
+    {
+        return null;
+    }
+
 
     @Override
     public UserModel userLogin ( UserModel userModel )

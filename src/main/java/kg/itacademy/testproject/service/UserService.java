@@ -13,6 +13,8 @@ public interface UserService {
 
     UserModel getUserById ( Long userId );
 
+    UserModel getUserByLogin ( String login);
+
     List<UserModel> getAllUsers ();
 
     UserModel userLogin ( UserModel UserModel );

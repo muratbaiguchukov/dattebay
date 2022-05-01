@@ -117,7 +117,7 @@ public class UserController {
 
     //Регистрация
     @PostMapping("/sign-up")
-    public String register(@RequestBody UserModel userModel) {
+    public UserModel register( @RequestBody UserModel userModel) {
         return userService.createNewUser (userModel);
     }
 }

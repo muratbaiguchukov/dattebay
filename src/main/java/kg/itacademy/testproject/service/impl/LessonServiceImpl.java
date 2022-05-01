@@ -53,6 +53,6 @@ public class LessonServiceImpl implements LessonService {
     @Override
     public LessonModel getLessonById ( Long lessonId )
     {
-        ;
+        return null;
     }
 }
