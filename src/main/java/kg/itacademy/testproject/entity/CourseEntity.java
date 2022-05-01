@@ -13,6 +13,9 @@ import javax.persistence.Table;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CourseEntity extends BaseEntity {
-    @Column(name = "course_name")
+    @Column(name = "course_name", nullable = false)
     private String name;
+
+    @Column(name = "user_id")
+    private UserEntity userId;
 }

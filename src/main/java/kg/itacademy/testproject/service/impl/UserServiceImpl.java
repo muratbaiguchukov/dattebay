@@ -1,3 +1,4 @@
+/*
 package kg.itacademy.testproject.service.impl;
 
 import kg.itacademy.testproject.entity.UserEntity;
@@ -14,9 +15,9 @@ import lombok.AllArgsConstructor;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -36,8 +37,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRoleRepository userRoleRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     @Override
     public String getToken ( UserAuthModel userAuthDto )
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserService {
                 .findUserByLogin ( userAuthDto.getLogin () );
         if ( user == null )
         {
-            throw new UsernameNotFoundException ( "Username not found" );
+            throw new RuntimeException ( "Username not found" );
         }
         boolean isMatches = passwordEncoder.matches ( userAuthDto.getPassword (), user.getPassword () );
         if ( isMatches )
@@ -116,7 +117,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    @Override
+     @Override
     public UserModel userLogin ( UserModel userModel )
     {
         return null;
@@ -149,3 +150,4 @@ public class UserServiceImpl implements UserService {
     }
 
 }
+*/

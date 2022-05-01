@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LessonEntity extends BaseEntity {
-    @Column(name = "lesson_name")
+    @Column(name = "lesson_name", nullable = false)
     private String name;
 
 }

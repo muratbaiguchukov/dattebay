@@ -95,7 +95,7 @@ public class UserController {
     }
 
     //Вытащить всех пользователей
-    @GetMapping(path = "/get/allusers")
+    @GetMapping(path = "/get/all-users")
     public List<UserModel> getAllUsers ()
     {
         return userService.getAllUsers ();

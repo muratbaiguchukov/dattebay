@@ -1,3 +1,4 @@
+
 package kg.itacademy.testproject.configuration;
 
 import lombok.AllArgsConstructor;
@@ -25,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     {
         auth.jdbcAuthentication ()
                 .dataSource ( dataSource )
-                .usersByUsernameQuery ( "SELECT t.login, t.password, t.is_active FROM user_airport t WHERE t.login = ?" )
+                .usersByUsernameQuery ( "SELECT u.user_login, u.user_password, u.user_email u.user_activity FROM users u WHERE u.user_login = ?" )
                 .authoritiesByUsernameQuery (
                         "SELECT u.login, r.name_role " +
                         "FROM users_roles ur " +
@@ -33,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "   on ur.user_id = u.id " +
                         "INNER JOIN roles r " +
                         "   on ur.role_id = r.id " +
-                        "WHERE u.login = ? AND u.is_active = 1"
+                        "WHERE u.login = ? AND u.user_activity = 1"
                 );
     }
 
@@ -47,18 +48,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf ().disable ()
                 .authorizeRequests ()
 
-                .antMatchers ( HttpMethod.GET, "/api/aircraft/*" ).permitAll ()
-                .antMatchers ( HttpMethod.POST, "/api/aircraft/*" ).hasRole ( "Admin" )
-                .antMatchers ( HttpMethod.PUT, "/api/aircraft/*" ).hasRole ( "Admin" )
-                .antMatchers ( HttpMethod.DELETE, "/api/aircraft/*" ).hasRole ( "Admin" )
+                //USER
+                .antMatchers ( HttpMethod.GET, "/api/users/create" ).permitAll ()
+                .antMatchers ( HttpMethod.GET, "/api/users/get/{userId}" ).permitAll ()
+                .antMatchers ( HttpMethod.DELETE, "api/users/delete{userId}" ).permitAll ()
+                .antMatchers ( HttpMethod.PUT, "/api/users/update" ).permitAll ()
+                .antMatchers ( HttpMethod.GET, "/api/users/get/all-users" ).permitAll ()
+                .antMatchers ( HttpMethod.POST, "/api/users/sign-up" ).permitAll ()
 
-                .antMatchers ( HttpMethod.GET, "/api/airport/*" ).permitAll ()
-                .antMatchers ( HttpMethod.POST, "/api/airport/*" ).hasRole ( "Admin" )
-                .antMatchers ( HttpMethod.PUT, "/api/airport/*" ).hasRole ( "Admin" )
-                .antMatchers ( HttpMethod.DELETE, "/api/airport/*" ).hasRole ( "Admin" )
+                //LESSONS
+                .antMatchers ( HttpMethod.POST, "/api/lessons/create" ).hasRole ( "Teacher" )
+                .antMatchers ( HttpMethod.DELETE, "/api/lessons/delete/{lessonId}" ).hasRole ( "Teacher" )
 
-                .antMatchers ( "/api/user/*" ).permitAll ()
-                .antMatchers ( "/api/role/*" ).permitAll ()
+                //COURSE
+                .antMatchers ( HttpMethod.PUT, "/api/courses/create" ).hasRole ( "Teacher" )
+                .antMatchers ( HttpMethod.DELETE, "/api/courses/delete/{courseId}" ).hasRole ( "Teacher" )
 
                 .and ()
                 .httpBasic ();
@@ -70,3 +74,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder ();
     }
 }
+

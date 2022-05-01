@@ -1,6 +1,5 @@
 package kg.itacademy.testproject.entity;
 
-
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -9,15 +8,18 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "images")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RoleEntity extends BaseEntity {
-    @Column(name = "name_role", nullable = false, unique = true)
-    private String nameRole;
+public class ImageEntity extends BaseEntity {
+
+    @Column(name = "image_name", nullable = false)
+    String imageName;
+
+    @Column(name = "image_url", nullable = false, unique = true)
+    String imageUrl;
 }

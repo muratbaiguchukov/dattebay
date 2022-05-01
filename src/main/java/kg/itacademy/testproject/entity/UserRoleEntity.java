@@ -14,6 +14,10 @@ import javax.persistence.Table;
 @Table(name = "users_roles")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserRoleEntity extends BaseEntity {
     @ManyToOne
