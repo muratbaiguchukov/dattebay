@@ -21,6 +21,6 @@ public interface CourseService {
 
     CourseModel getById(Long id);
 
-    List<CourseModel> getAllByCourseName(String courseName);
+    List<CourseModel> getAllByName(String courseName);
 
 }

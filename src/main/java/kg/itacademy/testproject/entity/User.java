@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users")
+@Table(name = "app_users")
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -25,4 +25,6 @@ public class User extends BaseEntity {
     @Column(name = "user_email", nullable = false, unique = true)
     private String email;
 
+    @Column(name = "is_active")
+    Boolean isActive;
 }

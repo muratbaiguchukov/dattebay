@@ -14,11 +14,11 @@ import javax.persistence.*;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LessonFile extends BaseEntity{
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "lesson_id", nullable = false)
     Lesson lesson;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "file_id", nullable = false)
     File file;
 }

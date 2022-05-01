@@ -9,11 +9,10 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query(value = "select u.* from users u where u.user_login = :FindUserByLoginAndPassword or u.user_password = :FindUserByLoginAndPassword", nativeQuery = true)
+    @Query(value = "select u.* from users u where u.user_login = :findUserByLoginAndPassword or u.user_password = :findUserByLoginAndPassword", nativeQuery = true)
     User FindUserByLoginPassword ( String findUserByLoginAndPassword );
 
-    User findUserByLogin ( String login );;
-
-    List<UserModel> getAllUsers ();
+    //User findUserByLogin ( String login );;
+    User findByLogin(String login);
 
 }

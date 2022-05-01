@@ -105,9 +105,9 @@ public class CourseController {
     }
 
     @GetMapping(path = "/getByCourseName")
-    public ResponseEntity<List<CourseModel>> getByCourseName(@RequestParam("courseName") String courseName) {
+    public ResponseEntity<List<CourseModel>> getByName(@RequestParam("courseName") String name) {
         try {
-            return ResponseEntity.ok(courseService.getAllByCourseName(courseName));
+            return ResponseEntity.ok(courseService.getAllByName(name));
         } catch (RuntimeException ex) {
             log.error(ex.getMessage(), ex);
             return ResponseEntity

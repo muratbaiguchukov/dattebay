@@ -84,8 +84,8 @@ public class UserController {
 
     //Вытащить всех пользователей
     @GetMapping(path = "/get/allusers")
-    public List<UserModel> getById() {
-        return (List<UserModel>) userService.getById();
+    public List<UserModel> getById(Long id) {
+        return (List<UserModel>) userService.getById(id);
     }
 
     //Авторизация пользователя
@@ -103,7 +103,7 @@ public class UserController {
 
     //Регистрация
     @PostMapping("/sign-up")
-    public String register(@RequestBody UserModel userModel) {
+    public UserModel register(@RequestBody UserModel userModel) {
 
         return userService.createNewUser(userModel);
     }

@@ -106,14 +106,14 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<CourseModel> getAllByCourseName(String courseName) {
+    public List<CourseModel> getAllByName(String name) {
         //Валидация
-        if (Strings.isBlank(courseName)) {
+        if (Strings.isBlank(name)) {
             throw new InvalidParameterException("course name is blank");
         }
 
         //Достаем все course по имени
-        List<Course> courseEntityList = courseRepository.findAllByCourseName(courseName);
+        List<Course> courseEntityList = courseRepository.findAllByName(name);
 
         //Создаем пустой массив моделек
         List<CourseModel> courseModelList = new ArrayList<>();

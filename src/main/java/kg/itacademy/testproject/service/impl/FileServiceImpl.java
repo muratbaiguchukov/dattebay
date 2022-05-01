@@ -44,7 +44,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public boolean update(FileModel fileModel) {
+    public boolean update(FileModel fileModel) throws FileNotFoundException {
         //Валидация
         if (fileModel == null) {
             throw new FileModelNullException("Create file model is null");
@@ -70,7 +70,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public boolean deleteById(Long id) {
+    public boolean deleteById(Long id) throws FileNotFoundException {
         //Валидация
         if (!fileRepository.existsById(id)) {
             throw new FileNotFoundException("File not found by id: " + id);
@@ -84,7 +84,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public FileModel getById(Long id) {
+    public FileModel getById(Long id) throws FileNotFoundException {
         //Валидация
         if (id == null) {
             throw new InvalidParameterException("Id is null");
@@ -115,7 +115,7 @@ public class FileServiceImpl implements FileService {
         }
 
         //Достаем все file по имени
-        List<File> fileEntityList = fileRepository.findAllByFileName(fileName);
+        List<File> fileEntityList = fileRepository.findAllByName(fileName);
 
         //Создаем пустой массив моделек
         List<FileModel> fileModelList = new ArrayList<>();

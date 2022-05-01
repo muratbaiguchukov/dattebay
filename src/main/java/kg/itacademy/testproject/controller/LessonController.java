@@ -63,9 +63,9 @@ public class LessonController {
     }
 
     @GetMapping(path = "/getByLessonName")
-    public ResponseEntity<List<LessonModel>> getByLessonName(@RequestParam("lessonName") String lessonName) {
+    public ResponseEntity<List<LessonModel>> getByName(@RequestParam("lessonName") String name) {
         try {
-            return ResponseEntity.ok(lessonService.getAllByLessonName(lessonName));
+            return ResponseEntity.ok(lessonService.getAllByName(name));
         } catch (RuntimeException ex) {
             log.error(ex.getMessage(), ex);
             return ResponseEntity

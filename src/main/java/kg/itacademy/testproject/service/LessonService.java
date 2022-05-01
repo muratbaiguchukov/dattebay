@@ -14,5 +14,5 @@ public interface LessonService {
 
     LessonModel getById(Long id);
 
-    List<LessonModel> getAllByLessonName(String lessonName);
+    List<LessonModel> getAllByName(String name);
 }

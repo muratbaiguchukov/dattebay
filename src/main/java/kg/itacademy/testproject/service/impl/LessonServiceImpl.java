@@ -8,6 +8,7 @@ import kg.itacademy.testproject.exceptions.LessonNotFoundException;
 import kg.itacademy.testproject.model.CourseModel;
 import kg.itacademy.testproject.model.LessonModel;
 import kg.itacademy.testproject.repository.CourseRepository;
+import kg.itacademy.testproject.repository.LessonRepository;
 import kg.itacademy.testproject.service.CourseService;
 import kg.itacademy.testproject.service.LessonService;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ public class LessonServiceImpl implements LessonService {
 
         //Валидация
         if (lessonModel == null) {
-            throw new LessonModelNullException("Create lesson model is null");
+            throw new RuntimeException ("Create lesson model is null");
         } else if (Strings.isBlank(lessonModel. getName())) {
             throw new InvalidParameterException("lesson name can't be blank");
         }
@@ -50,7 +51,7 @@ public class LessonServiceImpl implements LessonService {
     public boolean update(LessonModel lessonModel) {
         //Валидация
         if (lessonModel == null) {
-            throw new LessonModelNullException("Create lesson model is null");
+            throw new RuntimeException("Create lesson model is null");
         } else if (lessonModel.getName() == null || lessonModel.getName().equals("")) {
             throw new InvalidParameterException("lesson name can't be empty");
         } else if (lessonModel.getId() == null) {
@@ -110,14 +111,14 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
-    public List<LessonModel> getAllByLessonName(String lessonName) {
+    public List<LessonModel> getAllByName(String lessonName) {
         //Валидация
         if (Strings.isBlank(lessonName)) {
             throw new InvalidParameterException("lesson name is blank");
         }
 
         //Достаем все lesson по имени
-        List<Lesson> lessonEntityList = lessonRepository.findAllByLessonName(lessonName);
+        List<Lesson> lessonEntityList = lessonRepository.findAllByName(lessonName);
 
         //Создаем пустой массив моделек
         List<LessonModel> lessonModelList = new ArrayList<>();
@@ -137,3 +138,6 @@ public class LessonServiceImpl implements LessonService {
         return lessonModelList;
     }
 }
+
+
+        ;
