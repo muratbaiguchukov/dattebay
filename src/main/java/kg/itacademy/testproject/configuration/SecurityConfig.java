@@ -37,41 +37,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "WHERE u.login = ? AND u.user_activity = 1"
                 );
     }
-
-    @Override
-    protected void configure ( HttpSecurity http ) throws Exception
-    {
-        http
-                .sessionManagement ()
-                .sessionCreationPolicy ( SessionCreationPolicy.STATELESS )
-                .and ()
-                .csrf ().disable ()
-                .authorizeRequests ()
-
-                //USER
-                .antMatchers ( HttpMethod.GET, "/api/users/create" ).permitAll ()
-                .antMatchers ( HttpMethod.GET, "/api/users/get/{userId}" ).permitAll ()
-                .antMatchers ( HttpMethod.DELETE, "api/users/delete{userId}" ).permitAll ()
-                .antMatchers ( HttpMethod.PUT, "/api/users/update" ).permitAll ()
-                .antMatchers ( HttpMethod.GET, "/api/users/get/all-users" ).permitAll ()
-                .antMatchers ( HttpMethod.POST, "/api/users/sign-up" ).permitAll ()
-
-                //LESSONS
-                .antMatchers ( HttpMethod.POST, "/api/lessons/create" ).hasRole ( "Teacher" )
-                .antMatchers ( HttpMethod.DELETE, "/api/lessons/delete/{lessonId}" ).hasRole ( "Teacher" )
-
-                //COURSE
-                .antMatchers ( HttpMethod.PUT, "/api/courses/create" ).hasRole ( "Teacher" )
-                .antMatchers ( HttpMethod.DELETE, "/api/courses/delete/{courseId}" ).hasRole ( "Teacher" )
-
-                .and ()
-                .httpBasic ();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder ()
-    {
-        return new BCryptPasswordEncoder ();
-    }
 }
-

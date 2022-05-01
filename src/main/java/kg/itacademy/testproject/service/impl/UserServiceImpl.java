@@ -1,9 +1,14 @@
-/*
 package kg.itacademy.testproject.service.impl;
 
 import kg.itacademy.testproject.entity.UserEntity;
 import kg.itacademy.testproject.exceptions.IdIsNullException;
 import kg.itacademy.testproject.exceptions.LoginOrPasswordIsWrongException;
+//import kg.itacademy.testproject.exceptions.UserNotFoundException;
+//import kg.itacademy.testproject.model.UserAuthModel;
+//import kg.itacademy.testproject.model.UserModel;
+//import kg.itacademy.testproject.repository.RoleRepository;
+//import kg.itacademy.testproject.repository.UserRepository;
+//import kg.itacademy.testproject.repository.UserRoleRepository;
 import kg.itacademy.testproject.exceptions.UserNotFoundException;
 import kg.itacademy.testproject.model.UserAuthModel;
 import kg.itacademy.testproject.model.UserModel;
@@ -18,6 +23,7 @@ import org.springframework.http.HttpStatus;
 //import org.springframework.security.core.userdetails.UserDetails;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,13 +38,13 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private RoleRepository roleRepository;
+     private RoleRepository roleRepository;
 
-    @Autowired
+     @Autowired
     private UserRoleRepository userRoleRepository;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public String getToken ( UserAuthModel userAuthDto )
@@ -75,8 +81,10 @@ public class UserServiceImpl implements UserService {
         user.setLogin ( userModel.getLogin () );
         user.setPassword ( userModel.getPassword () );
         user.setEmail ( userModel.getEmail () );
+
         user = userRepository.save ( user );
 
+        userModel.setId ( user.getId () );
 
         return userModel;
     }
@@ -110,14 +118,14 @@ public class UserServiceImpl implements UserService {
         return userModel;
     }
 
-    @Override
+       @Override
     public UserModel getUserByLogin ( String login )
     {
         return null;
     }
 
 
-     @Override
+    @Override
     public UserModel userLogin ( UserModel userModel )
     {
         return null;
@@ -150,4 +158,3 @@ public class UserServiceImpl implements UserService {
     }
 
 }
-*/
